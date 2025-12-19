@@ -1,15 +1,15 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import ChatPage from '@/views/ChatPage.vue'
 
 const routes = [
   {
-    path: '/',
-    redirect: '/chat/1'
+    path: '/chat/:id',
+    name: 'chat',
+    component: () => import('@/views/ChatPage.vue'),
   },
   {
-    path: '/chat/:id',
-    component: ChatPage,
-  }
+    path: '/:pathMatch(.*)*',
+    redirect: '/chat/1',
+  },
 ]
 
 const router = createRouter({
