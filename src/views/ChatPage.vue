@@ -30,8 +30,8 @@
   onMounted(() => {
     chatStore.init(route.params.id as string | undefined)
 
-    if (chatStore.activeChatId) {
-      router.replace(`/chat/${chatStore.activeChatId}`)
+    if (!chatStore.hasChat(route.params.id as string)) {
+      router.replace(`/chat/${chatStore.firstChatId}`)
     }
   })
 

@@ -19,6 +19,16 @@ export const useChatStore = defineStore('chat', () => {
   const activeChat = computed(() => {
     return chats.value.find(c => c.id === activeChatId.value)
   })
+
+  const hasChat = (id: string | undefined): boolean => {
+    if (!id) return false
+
+    return chats.value.some(c => c.id === id)
+  }
+
+  const firstChatId = computed(() => {
+    return chats.value[0]?.id ?? ''
+  })
   
   const init = (chatIdFromRoute?: string) => {
     initChatStorage()
@@ -191,5 +201,7 @@ export const useChatStore = defineStore('chat', () => {
     isTyping, 
     theme, 
     createPrivateChat,
+    hasChat,
+    firstChatId,
   } 
 })
