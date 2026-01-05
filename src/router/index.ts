@@ -8,7 +8,7 @@ const routes = [
   },
   {
     path: '/:pathMatch(.*)*',
-    redirect: '/chat/1',
+    redirect: '/',
   },
 ]
 
