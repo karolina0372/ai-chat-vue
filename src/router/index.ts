@@ -2,7 +2,7 @@ import { createRouter, createWebHistory } from 'vue-router'
 
 const routes = [
   {
-    path: '/chat/:id',
+    path: '/chat/:id?',
     name: 'chat',
     component: () => import('@/views/ChatPage.vue'),
   },
@@ -14,7 +14,7 @@ const routes = [
 
 const router = createRouter({
   history: createWebHistory(),
-  routes
+  routes,
 })
 
 export default router

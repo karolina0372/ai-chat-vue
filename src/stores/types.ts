@@ -8,7 +8,6 @@ export interface Message {
 export interface Chat {
   id: string
   title: string
-  isActive: boolean
   isPrivate?: boolean
   messages: Message[]
 }

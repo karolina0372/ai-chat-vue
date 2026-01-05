@@ -21,7 +21,5 @@
 
   const { mdAndUp, smAndDown } = useDisplay()
 
-  const chatStore = useChatStore()
-
   const drawer = ref(false)
 </script>

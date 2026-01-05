@@ -14,13 +14,7 @@
 </template>
 
 <script setup lang="ts">
-  import { ref } from 'vue'
   import { useChatStore } from '@/stores/chat'
-  import { useDisplay } from 'vuetify'
-
-  const { mdAndUp, smAndDown } = useDisplay()
 
   const chatStore = useChatStore()
-
-  const drawer = ref(false)
 </script>

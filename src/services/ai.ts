@@ -21,7 +21,7 @@ export async function sendToAI(
 }
 
 export const generateChatTitle = async (message: string): Promise<string> => {
-  const response = await axios.post(
+  const response = await api.post(
     '/chat/completions',
     {
       model: 'llama3.1-8b',
@@ -48,7 +48,7 @@ export const generateChatTitle = async (message: string): Promise<string> => {
     },
   )
 
-  return response.data.choices[0].message
+  return response.data.choices[0].message.content.trim()
 }
 
 

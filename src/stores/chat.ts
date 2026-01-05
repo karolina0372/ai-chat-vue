@@ -44,7 +44,7 @@ export const useChatStore = defineStore('chat', () => {
         const data = JSON.parse(raw)
 
         chats.value = data.chats ?? [] 
-        activeChatId.value = data.activeChatId 
+        activeChatId.value = data.chats[0]?.id ?? null
         theme.value = data.theme 
       } catch { 
         chats.value = [] 
@@ -58,7 +58,7 @@ export const useChatStore = defineStore('chat', () => {
     localStorage.setItem(
         STORAGE_KEY, 
         JSON.stringify({ 
-          chats: chats.value, 
+          chats: chats.value.filter(chat => chat.isPrivate === false && chat.messages.length > 0), 
           activeChatId: activeChatId.value, 
           theme: theme.value, 
         }) 
@@ -131,7 +131,7 @@ export const useChatStore = defineStore('chat', () => {
     } 
   } 
           
-  const createNewChat = (isPrivate = false) => {
+  const createNewChat = () => {
     if (isTyping.value) return 
 
     const id = crypto.randomUUID()
@@ -139,12 +139,11 @@ export const useChatStore = defineStore('chat', () => {
     const newChat = { 
       id, 
       title: 'New chat',
-      isActive: true, 
       messages: [], 
-      isPrivate,
+      isPrivate: false,
     } 
     
-    chats.value.unshift(newChat)
+    chats.value.push(newChat)
 
     setActiveChat(newChat.id)
   } 
@@ -166,11 +165,13 @@ export const useChatStore = defineStore('chat', () => {
     const newChat = { 
       id, 
       title: 'New chat',
-      isActive: true, 
       messages: [],
+      isPrivate: true,
     } 
     
-    chats.value.unshift(newChat)
+    chats.value.push(newChat)
+
+    setActiveChat(newChat.id)
   }
   
   watch( () => theme.value, () => { 
